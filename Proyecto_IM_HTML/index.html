@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MathApp - Calculadora Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <header>
+        <div class="logo">Σ MathSolver</div>
+        <div class="top-buttons">
+            <button>Exportar PDF</button>
+            <button style="background:#64748b">Ajustes</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="user-profile">
+            <div style="width:50px; height:50px; background:#ddd; border-radius:50%; margin: 0 auto 10px;"></div>
+            <strong>Juan Pérez</strong>
+            <p style="font-size: 0.8rem; color: gray;">Premium Plan</p>
+        </div>
+        <ul style="list-style: none; padding: 20px 0;">
+            <li><a href="#">Mi Cuenta</a></li>
+            <li><a href="#">Mis Fórmulas</a></li>
+            <li style="margin-top: 20px;"><a href="#" style="color: red;">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="calc-container">
+            <h2>Nuevo Cálculo</h2>
+            <div class="input-group">
+                <label>Nombre de la operación</label>
+                <input type="text" placeholder="Ej: Cálculo de Resistencia">
+            </div>
+            <div class="input-group">
+                <label>Valores de entrada (Panel de escritura)</label>
+                <textarea rows="6" placeholder="Introduce variables o expresiones..."></textarea>
+            </div>
+            <button style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem;">
+                Calcular Resultado
+            </button>
+        </div>
+    </main>
+
+    <aside>
+        <h3>Historial</h3>
+        <div class="history-item">
+            <strong>Cálculo #102</strong><br>
+            Resultado: 42.50
+        </div>
+        <div class="history-item">
+            <strong>Cálculo #101</strong><br>
+            Resultado: 128.00
+        </div>
+    </aside>
+
+</body>
+</html>

@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class condicional3 {
 
-
+    
     //Ejemplo IF con doble condicionante para TRUE
 
     public static void main(String[] args) {

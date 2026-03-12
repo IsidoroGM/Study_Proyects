@@ -1,0 +1,101 @@
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: grid;
+            grid-template-areas: 
+                "header header header"
+                "nav main history";
+            grid-template-columns: 200px 1fr 250px;
+            grid-template-rows: 60px 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        /* --- BARRA SUPERIOR --- */
+        header {
+            grid-area: header;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo { font-weight: bold; color: var(--primary); font-size: 1.2rem; }
+        
+        .top-buttons button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* --- BARRA LATERAL IZQUIERDA (Usuario) --- */
+        nav {
+            grid-area: nav;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+        }
+
+        .user-profile {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* --- PANEL CENTRAL (Cálculos) --- */
+        main {
+            grid-area: main;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .calc-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            width: 100%;
+            max-width: 500px;
+            height: fit-content;
+        }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box; /* Evita que el padding ensanche el input */
+        }
+
+        /* --- BARRA LATERAL DERECHA (Historial) --- */
+        aside {
+            grid-area: history;
+            background: var(--sidebar-bg);
+            border-left: 1px solid var(--border);
+            padding: 20px;
+        }
+
+        .history-item {
+            font-size: 0.9rem;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            color: #64748b;
+        }
+    
