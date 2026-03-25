@@ -1,0 +1,78 @@
+<!-- implementar una funcionalidad en la página de inscripción, que permita a los usuarios saber si sus datos
+han sido correctamente ingresados al formulario y proporcionar retroalimentación en tiempo real. 
+Debe asegurarse de que cuando un usuario haga clic en el botón de enviar, el formulario se valide, 
+los campos vacíos se destaquen y se muestre un mensaje de éxito si todo está correcto.
+
+En el desarrollo se utilizará el manejo de eventos en JavaScript, 
+específicamente los eventos relacionados con formularios como `submit`, `focus` y `blur`,
+ así como `addEventListener` para agregar manejadores de eventos de manera eficiente. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_Ud5</title>
+</head>
+
+
+
+
+
+<body>
+    <form id="Formulario">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="Nombre"><br>
+
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" name="correo"><br>
+
+        <button type="submit">Enviar</button>
+
+    </form>
+     <p id="mensaje"></p>
+
+    
+</body>
+
+<script>
+    //Detectar el evento submit del formulario y validar campos
+    document.getElementById('Formulario').addEventListener('submit', function(event){
+        event.preventDefault(); //Prevenir el envío del formulario
+   
+    
+        const nombre=document.getElementById('nombre').value;
+        const correo=document.getElementById('correo').value;
+        let mensaje ='';
+
+        if(nombre === '' || correo ===''){
+            mensaje='Por favor, rellena los campos'
+        }else{
+            mensaje='Formulario enviado con exito'
+        };
+
+        document.getElementById('mensaje').textContent=mensaje;
+    });
+    
+    //Agregar retroalimentación en tiempo real con `focus` y `blur`:
+
+    const campos=document.querySelectorAll('input');
+
+    campos.forEach(campo=> {
+        campo.addEventListener('focus',function(){
+            this.style.border='2px solid blue';
+        });
+        campo.addEventListener('blur',function(){
+            if(this.value===''){
+                this.style.border='2px solid red';
+            }else{
+                this.style.border='2px solid green'
+            }
+        });
+    });
+
+    //Mostrar los resultados en la interfaz.
+    document.getElementById('mensaje').style.color=(mensaje==='Por favor, rellena todos los campos.') ? 'red' : 'green';
+
+</script>
+</html>
