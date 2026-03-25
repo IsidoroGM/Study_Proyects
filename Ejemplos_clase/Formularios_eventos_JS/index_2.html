@@ -1,0 +1,76 @@
+<!-- Implementar un formulario de comentarios para una página de reseñas de productos, en la que los usuarios puedan introducir su nombre y un comentario,
+así como poder añadir comentarios adicionales. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form id="comentarios">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre"><br>
+
+        <label for="comentario">Introduce tu comentario:</label>
+        <input type="text" name="comentario" id="comentario" required><br>    
+
+        <button type="button" id="agregarComentario">Enviar comentario extra</button>
+        <button type="'submit">Enviar comentario </button>
+
+    </form>
+    <p id="mensaje"></p>
+    
+    <script>
+        //Mediante JavaScript, se creará un evento que permita añadir un nuevo campo de texto cada vez que el usuario haga clic en el botón "Añadir comentario extra".
+
+        //Acceder al botón y al formulario
+        const botonAgregar=document.getElementById('agregarComentario');
+        const formulario=document.getElementById('comentarios');
+        let contador=0;
+
+        //Detectar el evento click del botón y agregar un nuevo campo de texto al formulario
+        botonAgregar.addEventListener('click',function(){
+
+            //Crear un nuevo elemento de entrada para el comentario adicional
+            //Añadimos una funcion para que tras 5 nuevos comentarios, el boton desaparezca
+
+        
+            if(contador <5){
+            const nuevoComentario=document.createElement('input');
+
+            //Cambiar el color tras hacer clic en el botón
+            const boton = document.getElementById('agregarComentario');
+            boton.style.backgroundColor = 'blue';
+            boton.style.color = 'white';
+            boton.style.borderRadius = '5px';
+
+            nuevoComentario.type='text';
+            nuevoComentario.name='comentarioExtra';
+            nuevoComentario.placeholder='Comentario Adicional';
+
+            //Agregar el nuevo campo de texto al formulario antes del botón
+            formulario.insertBefore(nuevoComentario, botonAgregar);
+
+            contador++;
+            }
+            if(contador ===5){
+                botonAgregar.style.display='none'; 
+            }
+        
+            
+        });
+
+        
+
+        formulario.addEventListener('submit', function(evento) {
+        evento.preventDefault();
+
+        document.getElementById('mensaje').textContent = 'Formulario enviado correctamente';
+        });
+
+    </script>
+</body>
+</html>
