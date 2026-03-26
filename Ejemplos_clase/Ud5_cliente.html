@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ud5_Cliente</title>
+    <link rel="stylesheet" href="styles_ud5.css">
+</head>
+<body>
+    <div class="form-container">
+     <form id='contact-form'>
+            <h2>Formulario de contacto</h2>
+
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+
+                <label for="email">Correo electronico:</label>
+                <input type="email" name="email" id="email" placeholder="Tu email:" required>
+
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" placeholder="+34 600-123-456" required>
+
+                <label for="password">Mensaje:</label>
+                <input name="password" id="password" placeholder="Ingresa tu contraseña" required>
+
+                <button type="submit">Enviar</button>
+        </form>
+
+    </div><br>
+
+
+    <script>
+
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
+    const regexPhone = /^\+\d{2} \d{3}-\d{3}-\d{3}$/;
+
+    const formulario = document.getElementById('contact-form');
+    formulario.addEventListener('submit', function(evento){
+
+        //Obtener los valores de los campos del formulario
+        const nombre = formulario.elements['name'].value;
+        const correo = formulario.elements['email'].value;
+        const contraseña = formulario.elements['password'].value;
+        const telefono = formulario.elements['phone'].value;
+
+            //Verificacion de nombre:
+            if(!regexNombre.test(nombre)){
+                alert("Nombre inválido");
+                evento.preventDefault();
+            }
+            //Verificacion de correo electronico:
+            if(!regexEmail.test(correo)){
+                alert("Email inválido");
+                evento.preventDefault();
+            }
+
+                //Verificacion de telefono:
+            if(!regexPhone.test(telefono)){
+                alert("Teléfono inválido. El formato debe ser: +34 600-123'-456");
+                evento.preventDefault();    
+            }
+             //Verificacion de contraseña:
+             if(!regexPassword.test(contraseña)){
+                alert("Contraseña inválida. Debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.");
+                evento.preventDefault();
+            }
+    });
+    </script>
+</body>
+</html>
