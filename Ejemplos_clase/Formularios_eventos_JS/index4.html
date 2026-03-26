@@ -1,0 +1,60 @@
+<!-- Resumen punto 4 -->
+
+<!-- Van a validarse los campos "nombre", "correo electrónico" y "edad" usando atributos HTML5,
+asegurándose de que los datos introducidos por los usuarios cumplan con ciertos requisitos básicos 
+(por ejemplo, no pueden estar vacíos, y la edad debe estar en un rango específico). -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Mediante el atributo `required` aseguramos que los campos no estén vacíos, mientras que `type="email"` y
+     `min/max` validan automáticamente el formato del correo y el rango de edad permitido. -->
+
+    <form id="registroUsuario">
+    <input type="text" name="nombre" required placeholder="Nombre" />
+    <input type="email" name="correo" required placeholder="Correo electrónico" />
+    <input type="number" name="edad" required min="18" max="99" required placeholder="Edad" />
+    <input type="submit" value="Registrar" />
+
+    <script>
+        const formulario=document.getElementById('registroUsuario');
+        fofmulario.addEventListener('submit', function(evento){
+            const nombre=formulario.elements['nombre'];
+            const correo= formulario.elements['correo'];
+            const edad=formulario.elements['edad'];
+
+            //validar nombre
+            if(nombre.value.trim()===''){
+                monstrarError('El nombre es obligatorio');
+                evento.preventDefault();
+            }
+
+            //Validar correo
+            if(!correo.value.includes('@')){
+                mostrarError('Correo inválido');
+            }
+
+            //Validar edad
+            if(edad.value < 18 || edad.value>99){
+                mostrarError('La edad debe estar entre 18 y 99 años.');
+                evento.preventDefault;
+            }
+            
+        });
+
+        function mostrarError(mensaje){
+            const mostrarError=document.getElementById('mensajeError');
+            mensajeError.textContent=mensaje;
+            mensajeError.style.display='La edad debe estar entre 18 y 99 años'
+        }
+    </script>
+
+    <p id="mensajeError" style="display: none; color: red;"></p>
+</body>
+</html>

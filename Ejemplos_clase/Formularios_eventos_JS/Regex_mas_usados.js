@@ -2,6 +2,26 @@
 // Regex (abreviatura de Regular Expression, o expresión regular) es una forma de buscar, validar o manipular texto usando patrones.
 // Una regex es como un “filtro inteligente” para texto.
 
+
+// METACARACTERES    
+// Son caracteres especiales que tienen significados específicos en expresiones regulares. Algunos de los más comunes son:
+// `.`: coincide con cualquier carácter.
+// `^`: coincide con el inicio de una cadena.
+// `$`: coincide con el final de una cadena.
+// `\d`: coincide con cualquier dígito (equivalente a `[0-9]`).
+// `\w`: coincide con cualquier carácter alfanumérico (letras, números y guion bajo).
+// `\s`: coincide con cualquier espacio en blanco (espacio, tabulador, salto de línea).
+
+
+//  CUANTIFICADORES
+// Cuantificadores
+// Especifican cuántas veces debe aparecer un carácter o grupo.
+// `*`: cero o más veces.
+// `+`: una o más veces.
+// `?`: cero o una vez.
+// `{n,m}`: entre `n` y `m` veces.
+
+
 // 🧠 Cuándo usar regex (muy importante)
 
 // ✔️ Validar formularios
@@ -61,6 +81,11 @@ const regexAlfanumerico = /^[a-zA-Z0-9]+$/;
 
 // ✔️ user123
 // ❌ user_123
+
+//-------------------------------- Validación de fechas
+const regexFecha= /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+
 
 // 🧪 EJEMPLO COMPLETO (modo PRO)
 
