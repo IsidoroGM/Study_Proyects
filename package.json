@@ -1,0 +1,28 @@
+{
+  "name": "proyectos_de_estudio",
+  "version": "1.0.0",
+  "description": "Hola buenos días",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsidoroGM/Study_Proyects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/IsidoroGM/Study_Proyects/issues"
+  },
+  "homepage": "https://github.com/IsidoroGM/Study_Proyects#readme",
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0"
+  },
+  "jest": {
+  "testEnvironment": "jsdom"
+  }
+}

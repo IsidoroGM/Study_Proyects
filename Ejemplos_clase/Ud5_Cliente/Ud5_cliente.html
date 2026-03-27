@@ -1,0 +1,149 @@
+//•	Formulario HTML con campos para ingresar nombre, correo electrónico, número de teléfono y contraseña,
+ utilizando la validación HTML5 para asegurar que los campos de correo y contraseña cumplan con sus formatos básicos.
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ud5_Cliente</title>
+    <link rel="stylesheet" href="styles_ud5.css">
+</head>
+<body>
+    <div class="form-container">
+     <form id='contact-form' novalidate>
+            <h2>Formulario de contacto</h2>
+
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                <small class="error" id="error-name"></small>
+
+                <label for="email">Correo electronico:</label>
+                <input type="email" name="email" id="email" placeholder="Tu email:" required>
+                <small class="error" id="error-email"></small>
+
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" placeholder="+34 600-123-456" required>
+                <small class="error" id="error-phone"></small>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
+                <small class="error" id="error-password"></small>
+
+                <button type="submit">Enviar</button>
+                
+        </form>
+        <div id="mensaje" style="margin-top: 20px; padding: 10px; display: none;"></div>
+    </div><br>
+
+    // 	Validación de JavaScript, según las siguientes comprobaciones e indicaciones
+    // 	El correo siga el formato adecuado. Para ello usamos "type='email'" en el input, pero también validamos con regex en JS.
+    // 	La contraseña tenga al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos. Para esto usamos una regex específica en JS.
+    // 	El número de teléfono siga el formato internacional, por ejemplo: +34 600-123-456. Validamos con regex en JS.
+    // 	Mostrar mensajes de error específicos debajo de cada campo si la validación falla, y un mensaje de éxito si el formulario se envía correctamente, mostrando la información en tiempo real.
+    // •	Gestionar los eventos de `submit` y `focus` para el formulario, donde se muestren los mensajes de error cuando los campos no son correctos y resaltando los campos de entrada mientras estén enfocados
+
+    <script>
+    // Validación del formulario
+    const formulario = document.getElementById('contact-form');
+    const contenedorMensaje = document.getElementById('mensaje');    
+
+    // Evento submit del formulario
+    formulario.addEventListener('submit', function(evento){
+    evento.preventDefault();
+
+    // Expresiones regulares para validación
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
+    const regexPhone = /^\+\d{2} \d{3}-\d{3}-\d{3}$/;
+
+    // Variable para controlar si el formulario es válido y ofrecer mensajes de error o validación exitosa.
+    let valido = true;
+
+    const nombre = formulario.elements['name'];
+    const correo = formulario.elements['email'];
+    const telefono = formulario.elements['phone'];
+    const contraseña = formulario.elements['password'];
+
+    limpiarErrores();
+
+    // Validación de cada campo con regex
+        // Nombre
+        if(!regexNombre.test(nombre.value.trim())){
+            mostrarError(nombre, "Solo letras y espacios", "error-name");
+            valido = false;
+        }
+
+        // Email
+        if(!regexEmail.test(correo.value.trim())){
+            mostrarError(correo, "Correo no válido", "error-email");
+            valido = false;
+        }
+
+        // Teléfono
+        if(!regexPhone.test(telefono.value.trim())){
+            mostrarError(telefono, "Formato: +34 600-123-456", "error-phone");
+            valido = false;
+        }
+
+        // Contraseña
+        if(!regexPassword.test(contraseña.value)){
+            mostrarError(contraseña, "Mínimo 8 caracteres con mayúscula, minúscula, número y símbolo", "error-password");
+            valido = false;
+        }
+        // Si todo es válido, mostrar mensaje de éxito
+        if(valido){
+            //alert("Formulario enviado correctamente");
+            contenedorMensaje.textContent='Formulario enviado con éxito';
+            contenedorMensaje.style.display = 'block'; // Lo hacemos visible
+            contenedorMensaje.style.color = 'green';
+            contenedorMensaje.style.border = '2px solid green';
+            //formulario.submit();
+
+            formulario.reset(); // Limpia los campos tras el éxito
+        }
+    });
+
+    // Mostrar error
+    // para ello creamos una función que recibe el input, el mensaje de error y el id del span donde se mostrará el error. 
+    // Esta función se encarga de mostrar el mensaje de error y resaltar el campo con un borde rojo.
+    function mostrarError(input, mensaje, idError){
+        const errorSpan = document.getElementById(idError);
+            if(errorSpan) {
+                errorSpan.textContent = mensaje;
+            }
+            input.style.border = '2px solid red';
+    }
+
+    // Limpiar errores
+    // Esta función se encarga de limpiar los mensajes de error y restablecer los estilos de los campos de entrada.
+    function limpiarErrores(){
+        document.querySelectorAll(".error").forEach(e => e.textContent = "");
+        document.querySelectorAll("input").forEach(i => i.style.border = '1px solid #ccc');
+        contenedorMensaje.style.display = 'none';
+    }
+
+    // Eventos focus y blur para resaltar campos
+    // para mejorar la experiencia del usuario, añadimos eventos de focus y blur a cada campo de entrada.
+    const campos=document.querySelectorAll('input');
+    campos.forEach(campo=> {
+            campo.addEventListener('focus',function(){
+                this.style.border='2px solid blue';
+            });
+            campo.addEventListener('blur',function(){
+                if(this.value.trim() === ''){
+                    this.style.border='2px solid red';
+                }else{
+                    this.style.border='2px solid green'
+                }
+            });
+    });
+    </script>
+</body>
+</html>
