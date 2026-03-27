@@ -24,18 +24,20 @@
                 <small class="error" id="error-phone"></small>
 
                 <label for="password">Contraseña:</label>
-                <input name="password" id="password" placeholder="Ingresa tu contraseña" required>
+                <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
                 <small class="error" id="error-password"></small>
 
                 <button type="submit">Enviar</button>
-                <div id="mensaje" style="margin-top: 20px; padding: 10px; display: none;"></div>
+                
         </form>
-
+        <div id="mensaje" style="margin-top: 20px; padding: 10px; display: none;"></div>
     </div><br>
 
 
     <script>
     const formulario = document.getElementById('contact-form');
+    const contenedorMensaje = document.getElementById('mensaje');    
+
     formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
 
@@ -53,38 +55,40 @@
 
     limpiarErrores();
 
-    // Nombre
-    if(!regexNombre.test(nombre.value.trim())){
-        mostrarError(nombre, "Solo letras y espacios", "error-name");
-        valido = false;
-    }
+        // Nombre
+        if(!regexNombre.test(nombre.value.trim())){
+            mostrarError(nombre, "Solo letras y espacios", "error-name");
+            valido = false;
+        }
 
-    // Email
-    if(!regexEmail.test(correo.value.trim())){
-        mostrarError(correo, "Correo no válido", "error-email");
-        valido = false;
-    }
+        // Email
+        if(!regexEmail.test(correo.value.trim())){
+            mostrarError(correo, "Correo no válido", "error-email");
+            valido = false;
+        }
 
-    // Teléfono
-    if(!regexPhone.test(telefono.value.trim())){
-        mostrarError(telefono, "Formato: +34 600-123-456", "error-phone");
-        valido = false;
-    }
+        // Teléfono
+        if(!regexPhone.test(telefono.value.trim())){
+            mostrarError(telefono, "Formato: +34 600-123-456", "error-phone");
+            valido = false;
+        }
 
-    // Contraseña
-    if(!regexPassword.test(contraseña.value)){
-        mostrarError(contraseña, "Mínimo 8 caracteres con mayúscula, minúscula, número y símbolo", "error-password");
-        valido = false;
-    }
-    const contenedorMensaje = document.getElementById('mensaje');
-    if(valido){
-        //alert("Formulario enviado correctamente");
-        contenedorMensaje.textContent='Formulario enviado con éxito';
-        contenedorMensaje.style.display = 'block'; // Lo hacemos visible
-        contenedorMensaje.style.color = 'green';
-        contenedorMensaje.style.border = '2px solid green';
-        formulario.submit();
-    }
+        // Contraseña
+        if(!regexPassword.test(contraseña.value)){
+            mostrarError(contraseña, "Mínimo 8 caracteres con mayúscula, minúscula, número y símbolo", "error-password");
+            valido = false;
+        }
+    
+        if(valido){
+            //alert("Formulario enviado correctamente");
+            contenedorMensaje.textContent='Formulario enviado con éxito';
+            contenedorMensaje.style.display = 'block'; // Lo hacemos visible
+            contenedorMensaje.style.color = 'green';
+            contenedorMensaje.style.border = '2px solid green';
+            //formulario.submit();
+
+            formulario.reset(); // Limpia los campos tras el éxito
+        }
     });
 
     // Mostrar error
@@ -93,13 +97,14 @@
             if(errorSpan) {
                 errorSpan.textContent = mensaje;
             }
-            input.classList.add("input-error");
+            input.style.border = '2px solid red';
     }
 
     // Limpiar errores
     function limpiarErrores(){
         document.querySelectorAll(".error").forEach(e => e.textContent = "");
-        document.querySelectorAll("input").forEach(i => i.classList.remove("input-error"));
+        document.querySelectorAll("input").forEach(i => i.style.border = '1px solid #ccc');
+        contenedorMensaje.style.display = 'none';
     }
     const campos=document.querySelectorAll('input');
     campos.forEach(campo=> {
@@ -107,7 +112,7 @@
                 this.style.border='2px solid blue';
             });
             campo.addEventListener('blur',function(){
-                if(this.value===''){
+                if(this.value.trim() === ''){
                     this.style.border='2px solid red';
                 }else{
                     this.style.border='2px solid green'
